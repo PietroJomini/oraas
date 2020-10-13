@@ -4,17 +4,36 @@ import { OBJLoader2 } from "https://threejsfundamentals.org/threejs/resources/th
 import { MTLLoader } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/MTLLoader.js";
 import { MtlObjBridge } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js";
 
+export const defaults = {
+  fov: 45,
+  aspect: 2,
+  background: 0xefefef,
+  lightSkyColor: 0xffffff,
+  lightIntensity: 1,
+  lightGroudnColor: 0xdddddd,
+  fitRatio: 1.2,
+};
+
 export const render = ({
   DOMElement,
   OBJPath,
   MTLPath,
-  fov = 45,
-  aspect = 2,
-  background = 0xefefef,
-  lightSkyColor = 0xffffff,
-  lightIntensity = 1,
-  lightGroudnColor = 0xdddddd,
+  fov,
+  aspect,
+  background,
+  lightSkyColor,
+  lightIntensity,
+  lightGroudnColor,
+  fitRatio = 1,
 }) => {
+  fov = fov || defaults.fov;
+  aspect = aspect || defaults.aspect;
+  background = background || defaults.background;
+  lightSkyColor = lightSkyColor || defaults.lightSkyColor;
+  lightIntensity = lightIntensity || defaults.lightIntensity;
+  lightGroudnColor = lightGroudnColor || defaults.lightGroudnColor;
+  fitRatio = fitRatio || defaults.fitRatio;
+
   const renderer = new THREE.WebGLRenderer({ canvas: DOMElement });
   const camera = new THREE.PerspectiveCamera(fov, aspect);
 
@@ -56,7 +75,7 @@ export const render = ({
           const box = new THREE.Box3().setFromObject(OBJRes);
           const boxSize = box.getSize(new THREE.Vector3()).length();
           const boxCenter = box.getCenter(new THREE.Vector3());
-          const sizeToFit = boxSize * 1.2;
+          const sizeToFit = boxSize * fitRatio;
           const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5);
           const distance = (sizeToFit * 0.5) / Math.tan(halfFovY);
           const direction = new THREE.Vector3()
