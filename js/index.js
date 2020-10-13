@@ -10,9 +10,6 @@ const lightSkyColor = params.get('lightSkyColor');
 const lightGroudnColor = params.get('lightGroundColor');
 const fitRatio = params.get('fitRatio');
 
-fetch(MTLPath);
-fetch(OBJPath);
-
 render({
   DOMElement: document.querySelector('#mod'),
   OBJPath,

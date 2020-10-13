@@ -1,8 +1,8 @@
-import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r119/build/three.module.js";
-import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js";
-import { OBJLoader2 } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/OBJLoader2.js";
-import { MTLLoader } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/MTLLoader.js";
-import { MtlObjBridge } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js";
+import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/build/three.module.js';
+import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js';
+import { OBJLoader2 } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/OBJLoader2.js';
+import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/MTLLoader.js';
+import { MtlObjBridge } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
 
 export const defaults = {
   fov: 45,
@@ -44,14 +44,14 @@ export const render = ({
 
   // Scene
   const scene = new THREE.Scene();
-  scene.rotateX(-90 * Math.PI / 180);
+  scene.rotateX((-90 * Math.PI) / 180);
   scene.background = new THREE.Color(background);
 
   // Light
   const light = new THREE.HemisphereLight(
     lightSkyColor,
     lightGroudnColor,
-    lightIntensity,
+    lightIntensity
   );
   scene.add(light);
 
@@ -84,7 +84,7 @@ export const render = ({
             .normalize();
 
           camera.position.copy(
-            direction.multiplyScalar(distance).add(boxCenter),
+            direction.multiplyScalar(distance).add(boxCenter)
           );
           camera.near = boxSize / 100;
           camera.far = boxSize * 100;
@@ -96,15 +96,15 @@ export const render = ({
           controls.update();
 
           // Hide loader and show canvas
-          document.querySelector("#loader").style.visibility = "hidden";
-          DOMElement.style.visibility = "visible";
+          document.querySelector('#loader').style.visibility = 'hidden';
+          DOMElement.style.visibility = 'visible';
         },
-        (xhp) => console.log(`OBJ: ${xhp.loaded / xhp.total * 100}`),
-        () => console.log("OBJ Error"),
+        (xhp) => console.log(`OBJ: ${xhp.loaded} ${xhp.total}`),
+        () => console.log('OBJ Error')
       );
     },
-    (xhp) => console.log(`MTL: ${xhp.loaded / xhp.total * 100}`),
-    () => console.log("MTL Error"),
+    (xhp) => console.log(`MTL: ${(xhp.loaded / xhp.total) * 100}`),
+    () => console.log('MTL Error')
   );
 
   // Handle frame
