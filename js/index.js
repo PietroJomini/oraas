@@ -4,7 +4,7 @@ const params = new URLSearchParams(window.location.search);
 
 const OBJPath = params.get("obj");
 const MTLPath = params.get("mtl");
-const background = params.get("background");
+const background = `#${params.get("background")}`;
 
 render({
   DOMElement: document.querySelector("#mod"),
